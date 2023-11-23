@@ -125,7 +125,8 @@ class DropDownTextField extends StatefulWidget {
       this.listPadding,
       this.listTextStyle,
       this.checkBoxProperty,
-      this.autovalidateMode, this.maxLine = 1})
+      this.autovalidateMode,
+      this.maxLine = 1})
       : assert(initialValue == null || controller == null,
             "you cannot add both initialValue and multiController\nset initial value using controller\n\tMultiValueDropDownController(data:initial value)"),
         assert(
@@ -668,7 +669,7 @@ class _DropDownTextFieldState extends State<DropDownTextField>
                 builder: buildOverlay,
               ))),
     );
-    overlay?.insert(_isScrollPadding ? _entry2! : _entry!);
+    overlay.insert(_isScrollPadding ? _entry2! : _entry!);
   }
 
   _openOutSideClickOverlay(BuildContext context) {
@@ -686,7 +687,7 @@ class _DropDownTextFieldState extends State<DropDownTextField>
         ),
       );
     });
-    overlay2?.insert(_barrierOverlay!);
+    overlay2.insert(_barrierOverlay!);
   }
 
   void hideOverlay() {
@@ -1029,9 +1030,24 @@ class _SingleSelectionState extends State<SingleSelection> {
                         top: widget.listPadding.top),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(newDropDownList[index].name,
-                          maxLines: widget.maxLine,
-                          style: widget.listTextStyle),
+                      child: Row(
+                        children: [
+                          newDropDownList[index].iconImageUrl != null
+                              ? Padding(
+                                  padding: EdgeInsets.only(right: 8.0),
+                                  child: Image.network(
+                                    newDropDownList[index].iconImageUrl!,
+                                    width: 24,
+                                    height: 24,
+                                    fit: BoxFit.cover,
+                                  ),
+                                )
+                              : SizedBox(),
+                          Text(newDropDownList[index].name,
+                              maxLines: widget.maxLine,
+                              style: widget.listTextStyle),
+                        ],
+                      ),
                     ),
                   ),
                 );
@@ -1203,23 +1219,31 @@ class DropDownValueModel extends Equatable {
   final String name;
   final dynamic value;
 
+  /// [Optional] Network image for list item inside dropdown
+  final String? iconImageUrl;
+
   ///as of now only added for multiselection dropdown
   final String? toolTipMsg;
 
   const DropDownValueModel(
-      {required this.name, required this.value, this.toolTipMsg});
+      {required this.name,
+      required this.value,
+      this.toolTipMsg,
+      this.iconImageUrl});
 
   factory DropDownValueModel.fromJson(Map<String, dynamic> json) =>
       DropDownValueModel(
         name: json["name"],
         value: json["value"],
         toolTipMsg: json["toolTipMsg"],
+        iconImageUrl: json["iconImageUrl"],
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
         "value": value,
         "toolTipMsg": toolTipMsg,
+        "iconImageUrl": iconImageUrl,
       };
   @override
   List<Object> get props => [name, value];

@@ -88,7 +88,7 @@ class _TestPageState extends State<TestPage> {
                   dropDownItemCount: 6,
 
                   dropDownList: const [
-                    DropDownValueModel(name: 'name1', value: "value1"),
+                    DropDownValueModel(name: 'name1', value: "value1", iconImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Wikipedia-logo-v2-se-example.svg/135px-Wikipedia-logo-v2-se-example.svg.png?20110825142805"),
                     DropDownValueModel(
                         name: 'name2',
                         value: "value2",
@@ -308,7 +308,7 @@ class _TestPage2State extends State<TestPage2> {
                     dropDownItemCount: 6,
 
                     dropDownList: const [
-                      DropDownValueModel(name: 'name1', value: "value1"),
+                      DropDownValueModel(name: 'name1', value: "value1", iconImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/Wikipedia-logo-v2-se-example.svg/135px-Wikipedia-logo-v2-se-example.svg.png?20110825142805"),
                       DropDownValueModel(
                           name: 'name2',
                           value: "value2",
